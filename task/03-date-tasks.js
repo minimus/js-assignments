@@ -40,7 +40,8 @@ function parseDataFromRfc2822(value) {
   else if (utc.length < 5) utc += '0'.repeat(5 - utc.length);
   let dateStr = [dayOfWeek, day, month, year, time, utc].join(' ');
   return date.setTime(Date.parse(dateStr));*/
-  throw new Error('Not implemented');
+  //throw new Error('Not implemented');
+  return new Date(Date.parse(value));
 }
 
 /**
