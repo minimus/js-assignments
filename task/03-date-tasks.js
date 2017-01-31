@@ -22,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-  let
+  /*let
     date = new Date(),
     sd = value.split(' '),
     dayOfWeek = ((String(sd[0]).endsWith(',')) ? sd[0] : ''),
@@ -39,7 +39,8 @@ function parseDataFromRfc2822(value) {
   }
   else if (utc.length < 5) utc += '0'.repeat(5 - utc.length);
   let dateStr = [dayOfWeek, day, month, year, time, utc].join(' ');
-  return date.setTime(Date.parse(dateStr));
+  return date.setTime(Date.parse(dateStr));*/
+  throw new Error('Not implemented');
 }
 
 /**
