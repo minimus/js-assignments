@@ -43,6 +43,7 @@ function parseDataFromRfc2822(value) {
   throw new Error('Not implemented');
   //let date = new Date();
   //return date.setTime(Date.parse(value));
+  //return new Date(Date.parse(value));
 }
 
 /**
@@ -126,8 +127,7 @@ function angleBetweenClockHands(date) {
   let
     h = date.getHours() + (date.getTimezoneOffset() / 60),
     m = date.getMinutes(),
-    deg = 0.5 * (60 * ((h > 12) ? h - 12 : h) - 11 * m);
-  if (deg < 0) deg *= -1;
+    deg = Math.abs(0.5 * (60 * ((h > 12) ? h - 12 : h) - 11 * m));
   return ((deg > 180) ? 360 - deg : deg) * Math.PI / 180;
 }
 
