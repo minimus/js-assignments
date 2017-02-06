@@ -22,28 +22,8 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-  /*let
-    date = new Date(),
-    sd = value.split(' '),
-    dayOfWeek = ((String(sd[0]).endsWith(',')) ? sd[0] : ''),
-    day = ((dayOfWeek != '') ? sd[1] : sd[0]),
-    month = ((dayOfWeek != '') ? sd[2] : sd[1]),
-    year = ((dayOfWeek != '') ? sd[3] : sd[2]),
-    time = ((dayOfWeek != '') ? sd[4] : sd[3]),
-    utc = ((dayOfWeek != '') ? ((6 == sd.length) ? sd[5] : '') : ((5 == sd.length) ? sd[4] : ''));
-  if (0 == utc.startsWith('GMT')) {
-    if (utc.length > 3) {
-      utc = utc.replace('GMT', '');
-      if (utc.length < 5) utc += '0'.repeat(5 - utc.length);
-    }
-  }
-  else if (utc.length < 5) utc += '0'.repeat(5 - utc.length);
-  let dateStr = [dayOfWeek, day, month, year, time, utc].join(' ');
-  return date.setTime(Date.parse(dateStr));*/
-  throw new Error('Not implemented');
-  //let date = new Date();
-  //return date.setTime(Date.parse(value));
-  //return new Date(Date.parse(value));
+  //throw new Error('Not implemented');
+  return new Date(value);
 }
 
 /**
