@@ -23,7 +23,7 @@
  */
 function parseDataFromRfc2822(value) {
   //throw new Error('Not implemented');
-  return Date.parse(value);
+  return new Date(value);
 }
 
 /**
