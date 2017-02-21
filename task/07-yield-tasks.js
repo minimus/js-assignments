@@ -98,12 +98,6 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-  /*let stack = [root];
-  while (stack.length) {
-    let out = stack.shift();
-    if (out.children) stack.unshift(...out.children);
-    yield out;
-  }*/
   let stack = [root];
   while (stack.length) {
     let out = stack.pop();
