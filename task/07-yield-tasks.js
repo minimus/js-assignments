@@ -33,7 +33,17 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+  let index = 200;
+  while (index > 0) {
+    let
+      b = ((0 == (index % 2)) ? index/2 - 1 : Math.floor(index/2) - 1),
+      bottles = (b == 1) ? 'bottle' : 'bottles',
+      line = (0 == (index % 2)) ? `${(b == 0) ? 'No more' : b} ${bottles} of beer on the wall, ${(b == 0) ? 'no more' : b} ${bottles} of beer.` :
+        ((index > 1) ? `Take one down and pass it around, ${(b == 0) ? 'no more' : b} ${bottles} of beer on the wall.` :
+        'Go to the store and buy some more, 99 bottles of beer on the wall.');
+    yield line;
+    index--;
+  }
 }
 
 
@@ -47,7 +57,13 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+  let fn1 = 0, fn2 = 1;
+  while (true) {
+    let cur = fn1;
+    fn1 = fn2;
+    fn2 = cur + fn1;
+    yield cur;
+  }
 }
 
 
@@ -82,7 +98,18 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+  let stack = [root];
+  while (stack.length) {
+    let out = stack.shift();
+    if (out.children) stack.unshift(...out.children);
+    yield out;
+  }
+  /*let stack = [root];
+  while (stack.length) {
+    let out = stack.pop();
+    if (out.children) stack.push(...out.children.reverse());
+    yield out;
+  }*/
 }
 
 
@@ -108,7 +135,17 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+  yield root;
+  let seq = root.children, nextSeq;
+  while (seq.length) {
+    yield* seq;
+    nextSeq = [];
+    for (const child of seq) {
+      if (child.children) nextSeq.push(...child.children);
+    }
+    seq = nextSeq;
+  }
 }
 
 
@@ -126,7 +163,17 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+    //throw new Error('Not implemented');
+  let s1 = source1(), s2 = source2();
+  while (true) {
+    let
+      so1 = s1.next(),
+      so2 = s2.next(),
+      sMin = (!so1.done) ? ((!so2.done) ? Math.min(so1.value, so2.value) : so1.value) : so2.value,
+      sMax = (!(so1.done || so2.done)) ? Math.max(so1.value, so2.value) : null;
+    yield sMin;
+    if (sMax != null) yield sMax;
+  }
 }
 
 
