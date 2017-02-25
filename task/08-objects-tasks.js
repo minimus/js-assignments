@@ -23,7 +23,9 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+  this.width = width;
+  this.height = height;
+  this.__proto__.getArea = () => this.width * this.height;
 }
 
 
@@ -38,7 +40,7 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+  return JSON.stringify(obj);
 }
 
 
@@ -54,7 +56,7 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+  return Object.assign(Object.create(proto), JSON.parse(json));
 }
 
 
@@ -108,39 +110,95 @@ function fromJSON(proto, json) {
 
 const cssSelectorBuilder = {
 
-    element: function(value) {
-        throw new Error('Not implemented');
-    },
+  out: '',
+  level: 0,
 
-    id: function(value) {
-        throw new Error('Not implemented');
-    },
+  element: function (value) {
+    let level = 1;
+    if (this.level === level) throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    if (this.level > level) throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    this.out += value;
+    this.level = level;
+    let copy = Object.assign({}, this);
+    this.reset();
+    return copy;
+  },
 
-    class: function(value) {
-        throw new Error('Not implemented');
-    },
+  id: function (value) {
+    let level = 2;
+    if (this.level === level) throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    if (this.level > level) throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    this.out += `#${value}`;
+    this.level = level;
+    let copy = Object.assign({}, this);
+    this.reset();
+    return copy;
+  },
 
-    attr: function(value) {
-        throw new Error('Not implemented');
-    },
+  class: function (value) {
+    let level = 3;
+    if (this.level > level) throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    this.out += `.${value}`;
+    this.level = level;
+    let copy = Object.assign({}, this);
+    this.reset();
+    return copy;
+  },
 
-    pseudoClass: function(value) {
-        throw new Error('Not implemented');
-    },
+  attr: function (value) {
+    let level = 4;
+    if (this.level > level) throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    this.out += `[${value}]`;
+    this.level = level;
+    let copy = Object.assign({}, this);
+    this.reset();
+    return copy;
+  },
 
-    pseudoElement: function(value) {
-        throw new Error('Not implemented');
-    },
+  pseudoClass: function (value) {
+    let level = 5;
+    if (this.level > level) throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    this.out += `:${value}`;
+    this.level = level;
+    let copy = Object.assign({}, this);
+    this.reset();
+    return copy;
+  },
 
-    combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
-    },
+  pseudoElement: function (value) {
+    let level = 6;
+    if (this.level === level) throw new Error('Element, id and pseudo-element should not occur more then one time inside the selector');
+    if (this.level > level) throw new Error('Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element');
+    this.out += `::${value}`;
+    this.level = level;
+    let copy = Object.assign({}, this);
+    this.reset();
+    return copy;
+  },
+
+  combine: function (selector1, combinator, selector2) {
+    this.out = `${selector1.out} ${combinator} ${selector2.out}`;
+    let copy = Object.assign({}, this);
+    this.reset();
+    return copy;
+  },
+
+  stringify: function () {
+    let output = this.out;
+    this.reset();
+    return output;
+  },
+
+  reset: function () {
+    this.out = '';
+    this.level = 0;
+  }
 };
 
 
 module.exports = {
-    Rectangle: Rectangle,
-    getJSON: getJSON,
-    fromJSON: fromJSON,
-    cssSelectorBuilder: cssSelectorBuilder
+  Rectangle: Rectangle,
+  getJSON: getJSON,
+  fromJSON: fromJSON,
+  cssSelectorBuilder: cssSelectorBuilder
 };
