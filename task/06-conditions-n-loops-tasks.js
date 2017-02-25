@@ -31,9 +31,9 @@
  */
 function getFizzBuzz(num) {
   let out = '';
-  if (0 == num % 3) out += 'Fizz';
-  if (0 == num % 5) out += 'Buzz';
-  return (out == '') ? num : out;
+  if (0 === num % 3) out += 'Fizz';
+  if (0 === num % 5) out += 'Buzz';
+  return (out === '') ? num : out;
 }
 
 
@@ -178,9 +178,9 @@ function findFirstSingleChar(str) {
   for (let i = 0; i < str.length; i++) {
     let count = 0;
     for (let j = 0; j < str.length; j++) {
-      if (str[i] == str[j]) count++;
+      if (str[i] === str[j]) count++;
     }
-    if (count == 1) return str[i];
+    if (count === 1) return str[i];
   }
   return null;
 }
@@ -282,9 +282,9 @@ function isCreditCardNumber(cnn) {
   let sCNN = cnn.toString(), sum = 0;
   for (let i = sCNN.length - 1, j = 0; i >= 0; i--, j++) {
     let digit = parseInt(sCNN[i]);
-    sum += (1 == (j % 2)) ? ((digit < 5) ? digit * 2 : digit * 2 - 9) : digit;
+    sum += (1 === (j % 2)) ? ((digit < 5) ? digit * 2 : digit * 2 - 9) : digit;
   }
-  return (0 == sum % 10);
+  return (0 === sum % 10);
 }
 
 
@@ -311,7 +311,7 @@ function getDigitalRoot(num) {
     while (true) {
       sum += parseInt(strNum[i]);
       i++;
-      if (i == strNum.length) {
+      if (i === strNum.length) {
         if (sum > 9) continue startLoop;
         else break startLoop;
       }
@@ -343,22 +343,22 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
-  if (str.length == 0) return true;
+  if (str.length === 0) return true;
   if (0 != (str.length % 2)) return false;
   let opened = ['[', '(', '{', '<'], closed = [']', ')', '}', '>'], seq = str.split('');
-  if (-1 == opened.indexOf(seq[0])) return false;
+  if (-1 === opened.indexOf(seq[0])) return false;
   start:
     while (seq.length != 0) {
       for (let i = 0; i < seq.length - 1; i++) {
         let o = opened.indexOf(seq[i]), c = closed.indexOf(seq[i + 1]);
-        if (o != -1 && c == o) {
+        if (o != -1 && c === o) {
           seq.splice(i, 2);
           continue start;
         }
       }
       break;
     }
-  return (seq.length == 0);
+  return (seq.length === 0);
 }
 
 
@@ -465,9 +465,9 @@ function getCommonDirectoryPath(pathes) {
     for (let j = 0; j < minLength; j++) {
       let folder = '', equal = false;
       for (let i = 0; i < dirs.length; i++) {
-        if (i == 0) folder = dirs[i][j];
+        if (i === 0) folder = dirs[i][j];
         else {
-          equal = (folder == dirs[i][j]);
+          equal = (folder === dirs[i][j]);
           if (!equal) break start;
         }
       }
@@ -545,30 +545,30 @@ function evaluateTicTacToePosition(position) {
   for (let i = 0; i < len; i++) {
     let hSumX = 0, hSumO = 0, vSumX = 0, vSumO = 0;
     for (let j = 0; j < len; j++) {
-      if (position[i][j] == 'X') hSumX++;
-      if (position[j][i] == 'X') vSumX++;
-      if (position[i][j] == '0') hSumO++;
-      if (position[j][i] == '0') vSumO++;
+      if (position[i][j] === 'X') hSumX++;
+      if (position[j][i] === 'X') vSumX++;
+      if (position[i][j] === '0') hSumO++;
+      if (position[j][i] === '0') vSumO++;
     }
-    if (hSumX == len || vSumX == len) {
+    if (hSumX === len || vSumX === len) {
       winner = 'X';
       break;
     }
-    if (hSumO == len || vSumO == len) {
+    if (hSumO === len || vSumO === len) {
       winner = '0';
       break;
     }
   }
-  if (typeof winner == 'undefined') {
+  if (typeof winner === 'undefined') {
     let dSumX = 0, dSumO = 0, idSumX = 0, idSumO = 0;
     for (let i = 0; i < len; i++) {
-      if (position[i][i] == 'X') dSumX++;
-      if (position[i][i] == '0') dSumO++;
-      if (position[i][len - 1 - i] == 'X') idSumX++;
-      if (position[i][len - 1 - i] == '0') idSumO++;
+      if (position[i][i] === 'X') dSumX++;
+      if (position[i][i] === '0') dSumO++;
+      if (position[i][len - 1 - i] === 'X') idSumX++;
+      if (position[i][len - 1 - i] === '0') idSumO++;
     }
-    if (dSumX == len || idSumX == len) winner = 'X';
-    if (dSumO == len || idSumO == len) winner = '0';
+    if (dSumX === len || idSumX === len) winner = 'X';
+    if (dSumO === len || idSumO === len) winner = '0';
   }
 
   return winner;

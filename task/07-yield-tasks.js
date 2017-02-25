@@ -36,10 +36,10 @@ function* get99BottlesOfBeer() {
   let index = 200;
   while (index > 0) {
     let
-      b = ((0 == (index % 2)) ? index/2 - 1 : Math.floor(index/2) - 1),
-      bottles = (b == 1) ? 'bottle' : 'bottles',
-      line = (0 == (index % 2)) ? `${(b == 0) ? 'No more' : b} ${bottles} of beer on the wall, ${(b == 0) ? 'no more' : b} ${bottles} of beer.` :
-        ((index > 1) ? `Take one down and pass it around, ${(b == 0) ? 'no more' : b} ${bottles} of beer on the wall.` :
+      b = ((0 === (index % 2)) ? index/2 - 1 : Math.floor(index/2) - 1),
+      bottles = (b === 1) ? 'bottle' : 'bottles',
+      line = (0 === (index % 2)) ? `${(b === 0) ? 'No more' : b} ${bottles} of beer on the wall, ${(b === 0) ? 'no more' : b} ${bottles} of beer.` :
+        ((index > 1) ? `Take one down and pass it around, ${(b === 0) ? 'no more' : b} ${bottles} of beer on the wall.` :
         'Go to the store and buy some more, 99 bottles of beer on the wall.');
     yield line;
     index--;

@@ -85,7 +85,7 @@ function getArrayOfPositives(arr) {
  *    [ 'cat, 'dog', 'raccon' ] => [ 'cat', 'dog', 'racoon' ]
  */
 function getArrayOfStrings(arr) {
-  return arr.filter((v) => (typeof v == 'string' || v instanceof String));
+  return arr.filter((v) => (typeof v === 'string' || v instanceof String));
 }
 
 /**
@@ -275,7 +275,7 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  return (arr.length == 0) ? [] : arr.map((v, i) => Array.from({length: i + 1}, (sv) => v)).reduce((p, c) => p.concat(c), []);
+  return (arr.length === 0) ? [] : arr.map((v, i) => Array.from({length: i + 1}, (sv) => v)).reduce((p, c) => p.concat(c), []);
 }
 
 
@@ -456,7 +456,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]   
  */
 function getIdentityMatrix(n) {
-  return Array.from({length: n}, (v, i) => Array.from({length: n}, (val, idx) => ((i == idx) ? 1 : 0)));
+  return Array.from({length: n}, (v, i) => Array.from({length: n}, (val, idx) => ((i === idx) ? 1 : 0)));
 }
 
 /**
@@ -490,7 +490,7 @@ function getIntervalArray(start, end) {
  */
 function distinct(arr) {
   return arr.reduce(function (p, c) {
-    if (-1 == p.indexOf(c)) p.push(c);
+    if (-1 === p.indexOf(c)) p.push(c);
     return p;
   }, []);
 }
@@ -529,7 +529,7 @@ function group(array, keySelector, valueSelector) {
   return array.reduce(function (pr, cur) {
     if (!pr.find(el => el.indexOf(keySelector(cur)) != -1)) pr.push([keySelector(cur), [valueSelector(cur)]]);
     else pr.find(function (e) {
-      if (e[0] == keySelector(cur)) e[1].push(valueSelector(cur));
+      if (e[0] === keySelector(cur)) e[1].push(valueSelector(cur));
       return false;
     });
     return pr;
