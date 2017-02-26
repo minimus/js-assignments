@@ -160,10 +160,10 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-  return function(...args) {
-    logFunc(`${func.name}(${args.map((x) => JSON.stringify(x))}) starts`);
-    let out = func(...args);
-    logFunc(`${func.name}(${args.map((x) => JSON.stringify(x))}) ends`);
+  return function(...a) {
+    logFunc(`${func.name}(${a.map((x) => JSON.stringify(x))}) starts`);
+    let out = func(...a);
+    logFunc(`${func.name}(${a.map((x) => JSON.stringify(x))}) ends`);
     return out;
   }
 }
