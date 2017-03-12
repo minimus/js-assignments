@@ -28,7 +28,53 @@
  *   'NULL'      => false 
  */
 function findStringInSnakingPuzzle(puzzle, searchStr) {
-    throw new Error('Not implemented');
+  function getNextPoint(idx, x, y, path, branch) {
+    let i = idx + 1, found = false, nextX, nextY;
+    path.push(`${x},${y}`);
+    if (x < puzzle[y].length - 1 && puzzle[y][x + 1] === searchStr[i] && -1 === path.indexOf(`${x + 1},${y}`)) {
+      nextX = x + 1;
+      nextY = y;
+      found = true;
+    }
+    if (y < puzzle.length - 1 && puzzle[y + 1][x] === searchStr[i] && -1 === path.indexOf(`${x},${y + 1}`)) {
+      nextX = x;
+      nextY = y + 1;
+      if (found) branch.push([x, y + 1]);
+      found = true;
+    }
+    if (x > 0 && puzzle[y][x - 1] === searchStr[i] && -1 === path.indexOf(`${x - 1},${y}`)) {
+      nextX = x - 1;
+      nextY = y;
+      if (found) branch.push([x - 1, y]);
+      found = true;
+    }
+    if (y > 0 && puzzle[y - 1][x] === searchStr[i] && -1 === path.indexOf(`${x},${y - 1}`)) {
+      nextX = x;
+      nextY = y - 1;
+      if (found) branch.push([x, y - 1]);
+      found = true;
+    }
+    if (found && i < searchStr.length - 1) {
+      found = getNextPoint(i, nextX, nextY, path, branch);
+      while (!found && branch.length) {
+        let branchPoint = branch.pop();
+        found = getNextPoint(i, branchPoint[0], branchPoint[1], path, branch);
+      }
+    }
+    return found;
+  }
+  let fnd = false;
+  searchStartPoint:
+    for (let i = 0; i < puzzle.length; i++) {
+      for (let j = 0; j < puzzle[i].length; j++) {
+        if (puzzle[i][j] === searchStr[0]) {
+          let pathPoints = [], branchPoints = [];
+          fnd = getNextPoint(0, j, i, pathPoints, branchPoints);
+          if (fnd) break searchStartPoint;
+        }
+      }
+    }
+  return fnd;
 }
 
 
@@ -45,7 +91,18 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
  *    'abc' => 'abc','acb','bac','bca','cab','cba'
  */
 function* getPermutations(chars) {
-    throw new Error('Not implemented');
+  function gen(item) {
+    if (!item.length) store.push(prefix.join(''));
+    for (let i = 0; i < item.length; i++) {
+      item.push(item.shift());
+      prefix.push(item[0]);
+      gen(item.slice(1));
+      prefix.pop();
+    }
+  }
+  let store = [], prefix = [];
+  gen(chars.split(''));
+  yield* store;
 }
 
 
@@ -65,7 +122,20 @@ function* getPermutations(chars) {
  *    [ 1, 6, 5, 10, 8, 7 ] => 18  (buy at 1,6,5 and sell all at 10)
  */
 function getMostProfitFromStockQuotes(quotes) {
-    throw new Error('Not implemented');
+  if (!quotes.length) return 0;
+  let max = quotes.reduce((a, c) => (a > c) ? a : c), acc = 0, arr = [];
+  if (0 === quotes.indexOf(max)) {
+    quotes.shift();
+    acc += getMostProfitFromStockQuotes(quotes);
+  }
+  else {
+    arr = quotes.slice(0, quotes.indexOf(max));
+    acc += max * arr.length - arr.reduce((a, c) => a + c);
+    if (quotes.indexOf(max) < quotes.length - 1) {
+      acc += getMostProfitFromStockQuotes(quotes.slice(quotes.indexOf(max) + 1));
+    }
+  }
+  return acc;
 }
 
 
