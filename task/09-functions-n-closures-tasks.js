@@ -160,8 +160,7 @@ function retry(func, attempts) {
  *
  */
 function logger(func, logFunc) {
-  return function() {
-    let a = [...arguments];
+  return function(...a) {
     logFunc(`${func.name}(${a.map((x) => JSON.stringify(x))}) starts`);
     let out = func(...a);
     logFunc(`${func.name}(${a.map((x) => JSON.stringify(x))}) ends`);
@@ -186,10 +185,6 @@ function logger(func, logFunc) {
 function partialUsingArguments(fn) {
   let args = [...arguments].slice(1);
   return (...a) => fn(...args.concat(a));
-  /*return function () {
-    let a = [...arguments];
-    return fn(...args.concat(a));
-  }*/
 }
 
 
