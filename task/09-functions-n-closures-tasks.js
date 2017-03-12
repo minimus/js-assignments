@@ -90,10 +90,7 @@ function getPolynom() {
  */
 function memoize(func) {
   let mem;
-  return () => {
-    if (typeof mem === 'undefined') mem = func();
-    return mem;
-  }
+  return () => mem = (typeof mem === 'undefined') ? func() : mem;
 }
 
 
