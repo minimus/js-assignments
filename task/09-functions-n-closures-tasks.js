@@ -183,8 +183,7 @@ function logger(func, logFunc) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn) {
-  let args = [...arguments].slice(1);
-  return (...a) => fn(...args.concat(a));
+  return (...a) => fn(...[...arguments].slice(1).concat(a));
 }
 
 
