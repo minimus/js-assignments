@@ -124,7 +124,6 @@ function isTriangle(a, b, c) {
  *
  */
 function doRectanglesOverlap(rect1, rect2) {
-  //throw new Error('Not implemented');
   return (rect2.top < rect1.top + rect1.height && rect2.left < rect1.left + rect1.width);
 }
 
@@ -303,7 +302,6 @@ function isCreditCardNumber(cnn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-  //throw new Error('Not implemented');
   let sum = num;
   startLoop: while (true) {
     let i = 0, strNum = sum.toString();
@@ -345,7 +343,7 @@ function getDigitalRoot(num) {
 function isBracketsBalanced(str) {
   if (str.length === 0) return true;
   if (0 != (str.length % 2)) return false;
-  let opened = ['[', '(', '{', '<'], closed = [']', ')', '}', '>'], seq = str.split('');
+  const opened = ['[', '(', '{', '<'], closed = [']', ')', '}', '>'], seq = str.split('');
   if (-1 === opened.indexOf(seq[0])) return false;
   start:
     while (seq.length != 0) {
@@ -395,7 +393,7 @@ function isBracketsBalanced(str) {
  */
 function timespanToHumanString(startDate, endDate) {
   let
-    diff = Math.abs(endDate.getTime() - startDate.getTime()),//endDate.valueOf() - startDate.valueOf(),
+    diff = Math.abs(endDate.getTime() - startDate.getTime()),
     secs = 1000,
     mins = 1000 * 60,
     hours = 1000 * 60 * 60,
@@ -496,9 +494,9 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-  let out = [];
+  const out = [];
   for (let i = 0; i < m1.length; i++) {
-    let row = [];
+    const row = [];
     for (let j = 0; j < m2[0].length; j++) {
       let sm = 0;
       for (let k = 0; k < m2.length; k++) sm += (m2[k][j] * m1[i][k]);

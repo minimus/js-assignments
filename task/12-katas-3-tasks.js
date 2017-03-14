@@ -68,7 +68,7 @@ function findStringInSnakingPuzzle(puzzle, searchStr) {
     for (let i = 0; i < puzzle.length; i++) {
       for (let j = 0; j < puzzle[i].length; j++) {
         if (puzzle[i][j] === searchStr[0]) {
-          let pathPoints = [], branchPoints = [];
+          const pathPoints = [], branchPoints = [];
           fnd = getNextPoint(0, j, i, pathPoints, branchPoints);
           if (fnd) break searchStartPoint;
         }
@@ -100,7 +100,7 @@ function* getPermutations(chars) {
       prefix.pop();
     }
   }
-  let store = [], prefix = [];
+  const store = [], prefix = [];
   gen(chars.split(''));
   yield* store;
 }
@@ -123,14 +123,13 @@ function* getPermutations(chars) {
  */
 function getMostProfitFromStockQuotes(quotes) {
   if (!quotes.length) return 0;
-  let max = quotes.reduce((a, c) => (a > c) ? a : c), acc = 0, arr = [];
+  let max = quotes.reduce((a, c) => (a > c) ? a : c), acc = 0;
   if (0 === quotes.indexOf(max)) {
     quotes.shift();
     acc += getMostProfitFromStockQuotes(quotes);
   }
   else {
-    arr = quotes.slice(0, quotes.indexOf(max));
-    acc += max * arr.length - arr.reduce((a, c) => a + c);
+    acc += quotes.slice(0, quotes.indexOf(max)).reduce((a, c) => a + (max - c), 0);
     if (quotes.indexOf(max) < quotes.length - 1) {
       acc += getMostProfitFromStockQuotes(quotes.slice(quotes.indexOf(max) + 1));
     }
@@ -162,11 +161,25 @@ function UrlShortener() {
 UrlShortener.prototype = {
 
     encode: function(url) {
-        throw new Error('Not implemented');
+      let
+        ds = url.split('')
+          .reduce((a, c) => a + this.urlAllowedChars.indexOf(c).toLocaleString('en-US', {minimumIntegerDigits: 2}), ''),
+        out = '';
+      while (ds.length > 0) {
+        out += String.fromCharCode(parseInt((ds.length > 3) ? ds.slice(0, 4) : ds, 10));
+        ds = ds.slice(4);
+      }
+      return out;
     },
     
     decode: function(code) {
-        throw new Error('Not implemented');
+      const ds = code.split('').reduce((a, c) => {
+        if (this.urlAllowedChars.length < parseInt(c.charCodeAt(0), 10))
+          a.push(Math.floor(parseInt(c.charCodeAt(0), 10) / 100));
+        a.push(parseInt(c.charCodeAt(0), 10) % 100);
+        return a;
+      }, []);
+      return ds.map(v => this.urlAllowedChars[v]).join('');
     } 
 }
 

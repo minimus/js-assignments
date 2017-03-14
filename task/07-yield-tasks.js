@@ -98,9 +98,9 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-  let stack = [root];
+  const stack = [root];
   while (stack.length) {
-    let out = stack.pop();
+    const out = stack.pop();
     if (out.children) stack.push(...out.children.reverse());
     yield out;
   }
@@ -129,7 +129,6 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    //throw new Error('Not implemented');
   yield root;
   let seq = root.children, nextSeq;
   while (seq.length) {

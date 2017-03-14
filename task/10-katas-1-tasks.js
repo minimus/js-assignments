@@ -147,7 +147,7 @@ function* expandBraces(str) {
  */
 function getZigZagMatrix(n) {
   // Initializing the matrix
-  let matrix = [];
+  const matrix = [];
   for (let i = 0; i < n; i++) matrix.push([]);
   // Filling the matrix
   let i = 0, j = 0, mi = 1, mj = -1, hs = false, vs = false, num = 0;

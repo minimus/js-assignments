@@ -94,7 +94,7 @@ function parseBankAccount(bankAccount) {
  *                                                                                                'characters.'
  */
 function* wrapText(text, columns) {
-  let words = text.split(' ');
+  const words = text.split(' ');
   while (words.length) {
     let out = '';
     while (true) {
@@ -210,7 +210,7 @@ function* getFigureRectangles(figure) {
     return result;
   }
 
-  let fig = figure.split('\n');
+  const fig = figure.split('\n');
   fig.pop();
   for (let i = 0; i < fig.length - 1; i++) {
     let counting = false, width = 0, height = 0;
