@@ -123,7 +123,7 @@ function* getPermutations(chars) {
  */
 function getMostProfitFromStockQuotes(quotes) {
   if (!quotes.length) return 0;
-  let max = quotes.reduce((a, c) => (a > c) ? a : c), acc = 0;
+  let max = Math.max(...quotes), acc = 0;
   if (0 === quotes.indexOf(max)) {
     quotes.shift();
     acc += getMostProfitFromStockQuotes(quotes);
@@ -162,7 +162,7 @@ UrlShortener.prototype = {
 
     encode: function(url) {
       let
-        ds = url.split('')
+        ds = [...url]
           .reduce((a, c) => a + this.urlAllowedChars.indexOf(c).toLocaleString('en-US', {minimumIntegerDigits: 2}), ''),
         out = '';
       while (ds.length > 0) {

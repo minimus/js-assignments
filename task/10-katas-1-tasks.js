@@ -17,7 +17,6 @@
  *  ]
  */
 function createCompassPoints() {
-    //throw new Error('Not implemented');
     var sides = ['N','E','S','W'];  // use array of cardinal directions only!
   const b = 'b';
   let az = 0, out = [];
@@ -206,7 +205,6 @@ function getZigZagMatrix(n) {
  *
  */
 function canDominoesMakeRow(dominoes) {
-    //throw new Error('Not implemented');
   let table = [], out = true;
   table = dominoes.shift();
   while (dominoes.length) {
