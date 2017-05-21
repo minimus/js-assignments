@@ -227,7 +227,7 @@ function encodeToRot13(str) {
     output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm',
     out = '';
   for (let i = 0; i < str.length; i++)
-    out += (-1 != input.indexOf(str[i])) ? output.charAt(input.indexOf(str[i])) : str[i];
+    out += (-1 !== input.indexOf(str[i])) ? output.charAt(input.indexOf(str[i])) : str[i];
   return out;
 }
 

@@ -158,14 +158,14 @@ function getZigZagMatrix(n) {
       hs = true;
       vs = false;
     }
-    else if ((i === 0 && j != n - 1 && mi < 0 && !vs) || (i === n - 1 && mj < 0 && !hs)) {
+    else if ((i === 0 && j !== n - 1 && mi < 0 && !vs) || (i === n - 1 && mj < 0 && !hs)) {
       j++;
       hs = true;
       vs = false;
       mj = 0 - mj;
       mi = 0 - mi;
     }
-    else if ((j === 0 && i != n - 1 && mj < 0 && !hs) || (j === n - 1 && mi < 0 && !vs)) {
+    else if ((j === 0 && i !== n - 1 && mj < 0 && !hs) || (j === n - 1 && mi < 0 && !vs)) {
       i++;
       hs = false;
       vs = true;
@@ -210,7 +210,7 @@ function canDominoesMakeRow(dominoes) {
   while (dominoes.length) {
     let bone;
     bone = dominoes.find((e) => (e[0] === table[0] || e[0] === table[1] || e[1] === table[0] || e[1] === table[1]));
-    if (typeof bone != 'undefined') {
+    if (typeof bone !== 'undefined') {
       if (bone[0] === table[0]) table[0] =  bone[1];
       else if (bone[1] === table[0]) table[0] = bone[0];
       else if (bone[0] === table[1]) table[1] = bone[1];

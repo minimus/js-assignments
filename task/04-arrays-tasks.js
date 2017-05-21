@@ -517,7 +517,7 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
   return array.reduce((pr, cur) => {
-    if (!pr.find(el => el.indexOf(keySelector(cur)) != -1)) pr.push([keySelector(cur), [valueSelector(cur)]]);
+    if (!pr.find(el => el.indexOf(keySelector(cur)) !== -1)) pr.push([keySelector(cur), [valueSelector(cur)]]);
     else pr.find(e => {
       if (e[0] === keySelector(cur)) e[1].push(valueSelector(cur));
       return false;

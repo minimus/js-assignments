@@ -165,7 +165,7 @@ function* mergeSortedSequences(source1, source2) {
       sMin = (!so1.done) ? ((!so2.done) ? Math.min(so1.value, so2.value) : so1.value) : so2.value,
       sMax = (!(so1.done || so2.done)) ? Math.max(so1.value, so2.value) : null;
     yield sMin;
-    if (sMax != null) yield sMax;
+    if (sMax !== null) yield sMax;
   }
 }
 

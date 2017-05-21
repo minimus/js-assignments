@@ -243,7 +243,7 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-  let count = 0, power = 1, out = 0, round, tempNum = num;
+  let count = 0, power = 1, out = 0, tempNum = num;
   while (power <= num) {
     count++;
     power *= 10;
@@ -342,14 +342,14 @@ function getDigitalRoot(num) {
  */
 function isBracketsBalanced(str) {
   if (str.length === 0) return true;
-  if (0 != (str.length % 2)) return false;
+  if (0 !== (str.length % 2)) return false;
   const opened = ['[', '(', '{', '<'], closed = [']', ')', '}', '>'], seq = str.split('');
   if (-1 === opened.indexOf(seq[0])) return false;
   start:
-    while (seq.length != 0) {
+    while (seq.length !== 0) {
       for (let i = 0; i < seq.length - 1; i++) {
         let o = opened.indexOf(seq[i]), c = closed.indexOf(seq[i + 1]);
-        if (o != -1 && c === o) {
+        if (o !== -1 && c === o) {
           seq.splice(i, 2);
           continue start;
         }

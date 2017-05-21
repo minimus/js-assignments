@@ -150,7 +150,7 @@ function getPokerHandRank(hand) {
     rankMatch = handRank.match(/(.)\1{1,3}/g),
     suitMatch = handSuit.match(/(.)\1{4}/g),
     out;
-  if (rankMatch != null) {
+  if (rankMatch !== null) {
     if (rankMatch.length === 1) {
       if (rankMatch[0].length === 4) out = PokerRank.FourOfKind;
       else if (rankMatch[0].length === 3) out = PokerRank.ThreeOfKind;
@@ -162,10 +162,10 @@ function getPokerHandRank(hand) {
     }
   }
   else if (-1 < ranking.indexOf(handRank) || handRank === straight) {
-    if (suitMatch != null) out = PokerRank.StraightFlush;
+    if (suitMatch !== null) out = PokerRank.StraightFlush;
     else out = PokerRank.Straight;
   }
-  else if (suitMatch != null) out = PokerRank.Flush;
+  else if (suitMatch !== null) out = PokerRank.Flush;
   else out = PokerRank.HighCard;
   return out;
 }
