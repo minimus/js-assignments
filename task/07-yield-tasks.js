@@ -57,12 +57,10 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-  let fn1 = 0, fn2 = 1;
+  let [fn1, fn2] = [0, 1];
   while (true) {
-    let cur = fn1;
-    fn1 = fn2;
-    fn2 = cur + fn1;
-    yield cur;
+    yield fn1;
+    [fn1, fn2] = [fn2, fn2 + fn1];
   }
 }
 
